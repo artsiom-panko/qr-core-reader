@@ -1,9 +1,10 @@
 import mss
 import numpy
 import cv2
-# from win10toast import ToastNotifier
+import winsound
+from win10toast import ToastNotifier
 
-# toaster = ToastNotifier()
+toaster = ToastNotifier()
 
 def capture_screen_and_detect_qr():
     qr_codes = set()
@@ -23,9 +24,10 @@ def capture_screen_and_detect_qr():
             if points is not None and qr_code and qr_code not in qr_codes:
                 qr_codes.add(qr_code)
                 print(f"New QR code detected: {qr_codes}")
+                winsound.PlaySound("rooster.wav", winsound.SND_FILENAME)
 
-                # print(f"QR Code detected: {data}")
-                # toaster.show_toast("QR Code Detected", data, duration=5)
+                # toaster.show_toast("GEEKSFORGEEKS!", "You got notification", duration = 10,
+                #                    icon_path ="https://media.geeksforgeeks.org/wp-content/uploads/geeks.ico")
 
 # Run the application
 capture_screen_and_detect_qr()

@@ -7,7 +7,8 @@ import winsound
 templates = {
     "STOP sign": cv2.imread('img/road-signs/stop_sign.png', cv2.IMREAD_GRAYSCALE),
     "Turn left sign": cv2.imread('img/road-signs/turn_left_sign.png', cv2.IMREAD_GRAYSCALE),
-    "Turn right sign": cv2.imread('img/road-signs/turn_right_sign.png', cv2.IMREAD_GRAYSCALE)
+    "Turn right sign": cv2.imread('img/road-signs/turn_right_sign.png', cv2.IMREAD_GRAYSCALE),
+    "Turn right sign small": cv2.imread('img/road-signs/turn_right_small.png', cv2.IMREAD_GRAYSCALE)
 }
 
 # Check if all templates are loaded

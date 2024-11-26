@@ -1,52 +1,45 @@
+import cv2
 import mss
 import numpy
-import cv2
 import winsound
 
-# Load all the road sign templates
-templates = {
-    "STOP sign": cv2.imread('img/road-signs/stop_sign.png', cv2.IMREAD_GRAYSCALE),
-    "Turn left sign": cv2.imread('img/road-signs/turn_left_sign.png', cv2.IMREAD_GRAYSCALE),
-    "Turn right sign": cv2.imread('img/road-signs/turn_right_sign.png', cv2.IMREAD_GRAYSCALE),
-    "Turn right sign small": cv2.imread('img/road-signs/turn_right_small.png', cv2.IMREAD_GRAYSCALE)
-}
+def load_templates():
+    templates = {
+        "STOP sign": cv2.imread('img/road-signs/stop_sign.png', cv2.IMREAD_GRAYSCALE),
+        "Turn left sign": cv2.imread('img/road-signs/turn_left_sign.png', cv2.IMREAD_GRAYSCALE),
+        "Turn right sign": cv2.imread('img/road-signs/turn_right_sign.png', cv2.IMREAD_GRAYSCALE),
+        "Turn right sign small": cv2.imread('img/road-signs/turn_right_small.png', cv2.IMREAD_GRAYSCALE)
+    }
 
-# Check if all templates are loaded
-for name, template in templates.items():
-    if template is None:
-        print(f"Error: Template image '{name}' not found!")
-        exit(1)
+    for name, template in templates.items():
+        if template is None:
+            print(f"Error: Template image '{name}' not found!")
+            exit(1)
 
-# Define a match threshold
-match_threshold = 0.8
+    return templates
 
-# Initialize mss for screen capturing
-with mss.mss() as sct:
-    monitor = sct.monitors[1]  # Full screen capture (monitor[1] is the main screen)
+def detect_road_signs():
+    templates = load_templates()
 
-    while True:
-        # Capture the screen
-        screenshot = sct.grab(monitor)
+    match_threshold = 0.8
 
-        # Convert the screenshot to a NumPy array
-        screen_image = numpy.array(screenshot)
+    with mss.mss() as sct:
+        monitor = sct.monitors[1]  # Full screen capture (monitor[1] is the main screen)
 
-        # Convert the screenshot from BGRA to GRAY for matching
-        screen_gray = cv2.cvtColor(screen_image, cv2.COLOR_BGRA2GRAY)
+        while True:
+            screenshot = sct.grab(monitor)
+            screen_image = numpy.array(screenshot)
+            screen_gray = cv2.cvtColor(screen_image, cv2.COLOR_BGR2GRAY)
 
-        # Loop through each template and check for matches
-        for name, template in templates.items():
-            template_height, template_width = template.shape
+            for name, template in templates.items():
+                result = cv2.matchTemplate(screen_gray, template, cv2.TM_CCOEFF_NORMED)
+                locations = numpy.nonzero(result >= match_threshold)
 
-            # Match the template
-            result = cv2.matchTemplate(screen_gray, template, cv2.TM_CCOEFF_NORMED)
+                if len(locations[0]) > 0:
+                    print(f"{name} detected!")
 
-            # Find locations where the match exceeds the threshold
-            locations = numpy.where(result >= match_threshold)
-
-            if len(locations[0]) > 0:
-                print(f"{name} detected!")
-
+def detect_qr_code():
+    print(f"not ready yet")
 # def capture_screen_and_detect_qr():
 #     qr_codes = set()
 #
@@ -67,6 +60,10 @@ with mss.mss() as sct:
 #                 qr_codes.add(qr_code)
 #                 print(f"New QR code detected: {qr_codes}")
 #                 winsound.PlaySound("rooster.wav", winsound.SND_FILENAME)
-#
-# # Run the application
-# capture_screen_and_detect_qr()
+
+def main():
+    detect_road_signs()
+    detect_qr_code()
+
+if __name__ == "__main__":
+    main()

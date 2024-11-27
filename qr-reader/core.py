@@ -71,9 +71,16 @@ def main():
             screen_gray = cv2.cvtColor(screen_image, cv2.COLOR_BGR2GRAY)
 
             # Detect road signs
-            detect_road_signs(screen_gray, templates)
+            try:
+                detect_road_signs(screen_gray, templates)
+            except:
+                print("An exception occurred during road sign detection")
+
             # Detect QR codes
-            detect_qr_code(screen_gray, qr_detector, detected_qr_codes)
+            try:
+                detect_qr_code(screen_gray, qr_detector, detected_qr_codes)
+            except:
+                print("An exception occurred during QR code detection")
 
 
 if __name__ == "__main__":

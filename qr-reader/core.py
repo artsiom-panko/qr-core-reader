@@ -43,11 +43,26 @@ def detect_qr_code(screen_gray, qr_detector, detected_qr_codes):
 
 def main():
     # Define the templates and their file paths
-    template_paths = {
-        "STOP sign": 'img/road-signs/stop_sign.png',
+    template_paths = {        "STOP sign": 'img/road-signs/stop_sign.png',
         "Turn left sign": 'img/road-signs/turn_left_sign.png',
         "Turn right sign": 'img/road-signs/turn_right_sign.png',
-        "Turn right sign small": 'img/road-signs/turn_right_small.png'
+        "Turn right sign small": 'img/road-signs/turn_right_small.png',
+        "Turn right sign1": 'img/road-signs/Screenshot_20241127_225248.jpg',
+        "Turn right sign2": 'img/road-signs/Screenshot_20241127_225254.jpg',
+        "Turn right sign3": 'img/road-signs/Screenshot_20241127_225304.jpg',
+        "Turn right sign4": 'img/road-signs/Screenshot_20241127_225310.jpg',
+        "Turn right sign5": 'img/road-signs/Screenshot_20241127_225357.jpg',
+        "Turn right sign6": 'img/road-signs/Screenshot_20241127_225402.jpg',
+        "Turn right sign7": 'img/road-signs/Screenshot_20241127_225409.jpg',
+        "Turn left sign1":'img/road-signs/screenshots/Screenshot_20241128_095700.jpg',
+        "Turn left sign2":'img/road-signs/screenshots/Screenshot_20241128_095708.jpg',
+        "Turn left sign3":'img/road-signs/screenshots/Screenshot_20241128_095711.jpg',
+        "Turn left sign4":'img/road-signs/screenshots/Screenshot_20241128_095717.jpg',
+        "Turn left sign5":'img/road-signs/screenshots/Screenshot_20241128_095737.jpg',
+        "Turn left sign6":'img/road-signs/screenshots/Screenshot_20241128_095740.jpg',
+        "Turn left sign7":'img/road-signs/screenshots/Screenshot_20241128_095744.jpg',
+        "Turn left sign8":'img/road-signs/screenshots/Screenshot_20241128_095750.jpg',
+        "Turn left sign9":'img/road-signs/screenshots/Screenshot_20241128_095824.jpg'
     }
 
     # Load templates
